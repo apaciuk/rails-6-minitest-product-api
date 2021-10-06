@@ -37,3 +37,5 @@ group :development do
 end
 
 
+
+gem "jwt", "~> 2.3"
