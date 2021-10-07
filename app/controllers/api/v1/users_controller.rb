@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: %i[show update destroy]
+  before_action :check_owner, only: %i[update destroy]
   # POST /users
   def create
     @user = User.new(user_params)
@@ -26,7 +27,6 @@ class Api::V1::UsersController < ApplicationController
     @user.destroy
     head 204
   end
-
   private
   # Only allow a trusted parameter "white list" through.
   def user_params
@@ -34,5 +34,8 @@ class Api::V1::UsersController < ApplicationController
   end
   def set_user
     @user = User.find(params[:id])
+  end
+  def check_owner
+    head :forbidden unless @user.id == current_user&.id
   end
 end
