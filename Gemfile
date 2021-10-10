@@ -40,4 +40,3 @@ end
 
 gem "jwt", "~> 2.3"
 
-gem "minitest-rails", "~> 6.1"
